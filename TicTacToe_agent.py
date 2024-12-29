@@ -1,4 +1,5 @@
 from Random_TicTacToe_Agent import Random_Agent
+from MCTS_Agent import MonteCarloAgent
 
 class TicTacToe:
 	def __init__(self):
@@ -53,6 +54,7 @@ class TicTacToe:
 def main():
     ttt = TicTacToe()
     random_agent = Random_Agent(ttt.board)
+    mcts_agent = MonteCarloAgent(ttt.board)
     game_over = False
     player = "X"
 
@@ -70,7 +72,7 @@ def main():
                 else:
                     print("Invalid move. Try again.")
             else:
-                random_agent.make_move(player)
+                mcts_agent.make_move(player)
                 print("Random agent made their move.")
                 if ttt.check_win(player):
                     ttt.display_board()
