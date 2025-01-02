@@ -14,12 +14,16 @@ class MonteCarloAgent:
 			node = self.root
 			# Selection
 			while node.children and node.is_fully_expanded():
-				node = node.best_child()
+				node, _ = node.best_child()
+			
+			# print("Selected node: ", node.state.board)
 			
 			# Expansion
 			if not self.is_terminal_state(node.state):
 				node.expand()
 				node = random.choice(node.children) # randomly pick a child node to explore
+
+			# print("Expanded node: ", node.state.board)
 
 			# simulation
 			simulation_state = node.state.clone()
@@ -31,6 +35,8 @@ class MonteCarloAgent:
 				move = random.choice(valid_moves)
 				simulation_state.make_move(current_player, move)
 				current_player = 'O' if current_player == 'X' else 'X'
+
+			# print("Simulated state: ", simulation_state.board)
 
 			# Determine the simulation result
 			last_player = 'O' if current_player == 'X' else 'X'
